@@ -1,67 +1,76 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Code Challenge</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.5" />
     <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="assets/index.css" />
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./styles.css" />
+    <title>Flatdango</title>
   </head>
   <body>
-    <!-- navbar -->
-    <div class="heading">
-      <div class="item">
-        <h2 class="ui header">
-          <i class="orange ticket icon"></i>
-          <div class="content">FLATDANGO</div>
-          <div class="sub header" id="subtitle">BUY MOVIE TICKETS</div>
-        </h2>
-      </div>
-    </div>
+    <!-- Section for navigation bar -->
+    <section>
+      <nav class="navbar bg-yellow">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img
+              src="./logo.png"
+              alt="Logo"
+              width="50"
+              height="50"
+              class="d-inline-block align-text-top"
+            />
+            FLATDANGO: Your Best movie shop.
+          </a>
+        </div>
+      </nav>
+    </section>
 
-    <div class="ui centered grid">
-      <div class="four wide column">
-        <div class="list-container">
-          <!-- side menu -->
-          <ul class="ui divided list" id="films">
-            <li class="film item">Movie titles will go here.</li>
-          </ul>
+    <!-- Section for Movies, details and ticketing -->
+
+    <section id="movieDetails" class="movie-details d-flex">
+      <!-- first div  with all movie titles-->
+      <div id="movieTitles" class="movie-titles p-2 flex-fill">
+        <ul id="titles" class="titles">
+          <!-- destination of full list of movies here  -->
+        </ul>
+      </div>
+
+      <!-- second div with clicked/selected/first movie poster -->
+      <div id="moviePoster" class="movie-poster p-2 flex-fill">
+        <!-- insert first film poster here DONE-->
+      </div>
+
+      <!-- third div with details of selected movie and ticketing info etc. -->
+      <div id="tickets" class="tickets p-2 flex-fill">
+        <div id="titleAndRuntime" class="p-3 mb-2 bg-primary">
+          <!-- insert title info here DONE-->
+          <!-- insert runtime info here DONE-->
+        </div>
+        <div id="moreDetails" class="more-details">
+          <!-- insert description here DONE-->
+          <!-- insert button for showtime here DONE-->
+          <!-- insert span content to display remaining tickets here DONE-->
+          <!-- insert button for buying tickets here -->
         </div>
       </div>
-
-      <!-- poster -->
-      <div class="four wide column">
-        <img
-          id="poster"
-          src="assets/placeholderImage.png"
-          alt="[MOVIE TITLE]"
-        />
-      </div>
-
-      <!-- showing info -->
-      <div class="four wide column">
-        <div class="ui cards" id="showing">
-          <div class="card">
-            <div id="title" class="title">[MOVIE TITLE]</div>
-            <div id="runtime" class="meta">[RUNTIME] minutes</div>
-            <div class="content">
-              <div class="description">
-                <div id="film-info">[INSERT MOVIE DESCRIPTION HERE]</div>
-                <span id="showtime" class="ui label">[SHOWTIME]</span>
-                <span id="ticket-num">[X]</span> remaining tickets
-              </div>
-            </div>
-            <div class="extra content">
-              <button id="buy-ticket" class="ui orange button">
-                Buy Ticket
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <script src="src/index.js"></script>
+    </section>
   </body>
+  <script
+    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+    integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+    crossorigin="anonymous"
+  ></script>
+  <script src="./index.js"></script>
 </html>

@@ -1,52 +1,80 @@
-// Your code here
-let ticketNum = document.getElementById('ticket-num')
-let btn = document.getElementById('buy-ticket')
+//fetching data
+fetch("http://localhost:3000/films")
+  .then((response) => response.json())
+  .then((data) => {
+    const firstFilm = data.find((obj) => obj.id == 1);
+    
 
-//DOM render functions
-function renderOneMovie(movie) {
-    //build movie
-    let movieTitle = document.createElement('li')
-    movieTitle.style.cursor = 'pointer';
-    movieTitle.innerHTML = `<li>${movie.title}</li>`
-    //add movie to DOM
-    document.getElementById('films').appendChild(movieTitle)
+    //Here is to display the poster
+    const posterDiv = document.getElementById("moviePoster");
+    let imageElement = document.createElement("img");
 
-    //event listener
-    movieTitle.addEventListener('click', handlerMovie)
-    //event handler on titles
-    function handlerMovie(e) {
-        e.preventDefault()
-        document.getElementById('posterImg').innerHTML = `<img src = '${movie.poster}'>`
-        document.getElementById('title').innerHTML = `${movie.title}`.toUpperCase()
-        document.getElementById('rt').innerHTML = `${movie.runtime}`
-        document.getElementById('film-info').innerHTML = `${movie.description}`
-        document.getElementById('showtime').innerHTML = `${movie.showtime}`        
-        ticketNum.innerHTML = `${movie.capacity - movie.tickets_sold}`
-    }
+    imageElement.src = firstFilm.poster;
+    imageElement.alt = "Poster image";
+    imageElement.width = "300";
+    imageElement.height = "400";
+    posterDiv.appendChild(imageElement);
 
-    //event listener on the buy button
-    btn.addEventListener('click', handleClick)
+    //Here is to display title of first film.
+    const titleAndRuntime = document.getElementById("titleAndRuntime");
+    let filmTitle = document.createElement("p");
+    let filmRuntime = document.createElement("p");
 
-    //event handler on click
-    function handleClick(e) {
-        e.preventDefault()
-        console.log(`${movie.capacity - movie.tickets_sold}`);
-    }
+    filmTitle.innerText = firstFilm.title;
+    filmRuntime.innerText = `${firstFilm.runtime} minutes`;
+    titleAndRuntime.appendChild(filmTitle);
+    titleAndRuntime.appendChild(filmRuntime);
+
+    const moreDetails = document.getElementById("moreDetails");
+    let filmDescription = document.createElement("p");
+    let showtimeBtn = document.createElement("button");
+
+    let remTickets = firstFilm.capacity - firstFilm.tickets_sold;
+
+    let spanElement = document.createElement("span");
+    let ticketBtn = document.createElement("button");
+    let breakElement = document.createElement("br");
+
+    showtimeBtn.innerText = firstFilm.showtime;
+    filmDescription.innerText = firstFilm.description;
+    spanElement.innerText = `${remTickets} remaining tickets`;
+    ticketBtn.innerText = "Buy ticket";
+
+    moreDetails.appendChild(filmDescription);
+    moreDetails.appendChild(showtimeBtn);
+    moreDetails.appendChild(spanElement);
+    moreDetails.appendChild(breakElement);
+    moreDetails.appendChild(ticketBtn);
+
+    ticketBtn.addEventListener("click", () => {
+      if (remTickets === 1) {
+      
+        ticketBtn.innerText = "Sold out";
+        spanElement.innerText = ``;
+      } else {
+        --remTickets;
+      
+        spanElement.innerText = `${remTickets} remaining tickets`;
+      }
+    });
+  });
+
+function getFilms() {
+  fetch("http://localhost:3000/films")
+    .then((response) => response.json())
+    .then(renderFilms);
+}
+getFilms();
+
+function renderFilms(films) {
+  films.forEach(filmDetails);
 }
 
+function filmDetails(details) {
+  const titlesElement = document.getElementById("titles");
 
+  let listElem = document.createElement("li");
+  listElem.innerText = details.title;
 
-//fetch requests
-//get fetch for movie resource
-function getFilm() {
-    fetch('http://localhost:3000/films')
-       .then(res => res.json())
-       .then(films => films.forEach(movie => renderOneMovie(movie)))
+  titlesElement.appendChild(listElem);
 }
-
-//Initial Render
-//get data and render our movie to the DOM
-function initialize() {
-    getFilm()
-}
-initialize()
